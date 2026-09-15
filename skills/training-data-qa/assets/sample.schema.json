@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "task_id",
+    "source_id",
+    "group_id",
+    "split",
+    "prompt",
+    "answer",
+    "evidence",
+    "label",
+    "kind",
+    "parent_id",
+    "generator"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "task_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "group_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "prompt": {
+      "type": "string",
+      "minLength": 1
+    },
+    "answer": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidence": {
+      "type": "string",
+      "minLength": 1
+    },
+    "label": {
+      "type": "string",
+      "minLength": 1
+    },
+    "split": {
+      "enum": [
+        "train",
+        "validation",
+        "test",
+        "evaluation"
+      ]
+    },
+    "kind": {
+      "enum": [
+        "seed",
+        "golden",
+        "augmented",
+        "hard"
+      ]
+    },
+    "parent_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1
+    },
+    "generator": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "model_version",
+            "prompt_hash",
+            "seed",
+            "transform"
+          ],
+          "properties": {
+            "model_version": {
+              "type": "string",
+              "minLength": 1
+            },
+            "prompt_hash": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "seed": {
+              "type": "integer"
+            },
+            "transform": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "enum": [
+              "augmented",
+              "hard"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "parent_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "generator": {
+            "type": "object"
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "parent_id": {
+            "type": "null"
+          },
+          "generator": {
+            "type": "null"
+          }
+        }
+      }
+    }
+  ]
+}

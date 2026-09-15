@@ -1,0 +1,7 @@
+{
+  "version": "demo-rules-v1",
+  "forbidden_terms": [
+    "身份证号码",
+    "银行卡密码"
+  ]
+}

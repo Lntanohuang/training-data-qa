@@ -1,0 +1,4 @@
+interface:
+  display_name: "训练样本构造与标注质检"
+  short_description: "构造可追溯训练数据，检查标注质量与数据泄漏，组织专家抽检和版本封存"
+  default_prompt: "使用 $training-data-qa 根据治理数据和任务模板构造数据集，执行质检并生成专家抽检任务。"

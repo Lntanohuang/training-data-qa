@@ -1,0 +1,20 @@
+{
+  "task_id": "policy-evidence-extraction",
+  "prompt": "依据以下资料提取完整规则原文：{text}",
+  "seed": 20260915,
+  "split_ratios": {
+    "train": 0.5,
+    "validation": 0.2,
+    "test": 0.15,
+    "evaluation": 0.15
+  },
+  "target_labels": {
+    "时限": 0.5,
+    "资格": 0.5
+  },
+  "distribution_tolerance": 0.2,
+  "review_per_stratum": 1,
+  "max_synthetic_ratio": 0.3,
+  "near_duplicate_limit": 2000,
+  "near_duplicate_threshold": 0.92
+}
